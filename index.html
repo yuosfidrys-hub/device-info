@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>My Device Test</title>
+</head>
+<body>
+<h2>My Device Information</h2>
+
+<p id="device"></p>
+<p id="screen"></p>
+<p id="location">Location: Waiting...</p>
+
+<script>
+document.getElementById("device").innerText =
+  "Browser / Device: " + navigator.userAgent;
+
+document.getElementById("screen").innerText =
+  "Screen: " + screen.width + " x " + screen.height;
+
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(
+    function(position) {
+      document.getElementById("location").innerText =
+        "Location: " +
+        position.coords.latitude + ", " +
+        position.coords.longitude;
+    },
+    function() {
+      document.getElementById("location").innerText =
+        "Location: Permission denied";
+    }
+  );
+} else {
+  document.getElementById("location").innerText =
+    "Location is not supported";
+}
+</script>
+
+</body>
+</html>
